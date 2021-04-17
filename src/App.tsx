@@ -1,7 +1,7 @@
 // import React from 'react';
 // import logo from './logo.svg';
 import './App.less';
-import { Breadcrumb, Button, Layout, Menu } from 'antd';
+import { Breadcrumb, Button, Card, Layout, Menu } from 'antd';
 import { Header, Content } from 'antd/lib/layout/layout';
 import Sider from 'antd/lib/layout/Sider';
 import SubMenu from 'antd/lib/menu/SubMenu';
@@ -61,7 +61,14 @@ function App() {
               minHeight: 280,
             }}
           >
-            Content
+            
+            <Card title="title">
+              Content
+            </Card>
+
+            <Card title="title">
+              Content
+            </Card>
           </Content>
         </Layout>
       </Layout>
