@@ -6,9 +6,14 @@ import { Header, Content } from 'antd/lib/layout/layout';
 import Sider from 'antd/lib/layout/Sider';
 import SubMenu from 'antd/lib/menu/SubMenu';
 import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
+import withCardstyle from 'components/withCardStyle'
+import DragableCardList from 'components/DragableCardList'
+import { useState } from 'react';
 
+const StyleCard = withCardstyle(Card);
 const LayoutStyle = { height: '100vh' }
 function App() {
+  const [collapsed, setCollapsed] = useState(false);
   return (
     <Layout style={LayoutStyle}>
       <Header className="header">
@@ -20,12 +25,15 @@ function App() {
         </Menu>
       </Header>
       <Layout hasSider style={{ flexGrow: 1 }}>
-        <Sider width={200} className="site-layout-background">
+        <Sider width={200} className="site-layout-background"
+          collapsible collapsedWidth={80} theme='light'
+          onCollapse={(collapsed) => setCollapsed(collapsed)}>
           <Menu
             mode="inline"
             defaultSelectedKeys={['1']}
             defaultOpenKeys={['sub1']}
             style={{ height: '100%', borderRight: 0 }}
+            inlineCollapsed={collapsed}
           >
             <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
               <Menu.Item key="1">option1</Menu.Item>
@@ -59,17 +67,22 @@ function App() {
               padding: 24,
               margin: 0,
               minHeight: 280,
+              display: 'flex'
             }}
           >
+            <DragableCardList items={'Lorem ipsum dolor sit'.split(' ')} />
             
-            <Card title="title">
+            {/* <StyleCard title="title">
               Content
-            </Card>
+            </StyleCard>
 
-            <Card title="title">
+            <StyleCard title="title">
               Content
-            </Card>
+            </StyleCard> */}
+
+
           </Content>
+
         </Layout>
       </Layout>
     </Layout>
