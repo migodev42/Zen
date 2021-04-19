@@ -10,10 +10,18 @@ function withCardStyle(Card: CardInterface) {
     // constructor(props) {
     //   super(props);
     // }
+    
     render() {
       const { children, ...other_props } = this.props;
 
-      return <Card className={style.Card} {...other_props} >{children}</Card>
+      return <Card className={style.Card} {...other_props}        
+        onPointerDown={
+          e => {
+            console.log('card onPointerDown', e)
+            e.stopPropagation()
+          }
+        }        
+      >{children}</Card>
     }
   }
 }

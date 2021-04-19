@@ -67,16 +67,25 @@ const fn = (order, active, originalIndex, curIndex, x) => (index) =>
 
 function DragableCardList({ items }) {
   const order = useRef(items.map((_, index) => index)) // Store indicies as a local ref, this represents the item order
+
   const [springs, setSprings] = useSprings(items.length, fn(order.current)) // Create springs, each corresponds to an item, controlling its transform, scale, etc.
-  const bind = useDrag(({ args: [originalIndex], active, movement: [x, y] }) => {
+
+  const containerRef = useRef(null)
+  const bind = useDrag(({ event, args: [originalIndex], active, movement: [x, y] }) => {
+    console.log('contariner useDrag', event)
     const curIndex = order.current.indexOf(originalIndex)
     const curRow = clamp(Math.round((curIndex * 330 + x) / 330), 0, items.length - 1)
     const newOrder = swap(order.current, curIndex, curRow)
     setSprings(fn(newOrder, active, originalIndex, curIndex, x)) // Feed springs new style data, they'll animate the view without causing a single render
     if (!active) order.current = newOrder
+  }, {
+    // domTarget: containerRef,
+    // eventOptions: { passive: false },
   })
+
   return (
-    <div className="content" style={{ height: items.length * 330 }}>
+    // style={{ height: items.length * 330 }}
+    <div className="content" ref={containerRef}>
       {springs.map(({ zIndex, shadow, x, scale }, i) => (
         <animated.div
           {...bind(i)}
@@ -88,6 +97,14 @@ function DragableCardList({ items }) {
             scale
           }}
           children={items[i]}
+          onClick={(e) => {
+            console.log('container', e)
+          }}
+          onDragStart={(e) => {
+            console.log('container onDragStart', e)
+          }
+
+          }
         />
       ))}
     </div>

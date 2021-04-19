@@ -70,8 +70,17 @@ function App() {
               display: 'flex'
             }}
           >
-            <DragableCardList items={'Lorem ipsum dolor sit'.split(' ')} />
-            
+            {/* <DragableCardList items={'Lorem ipsum dolor sit'.split(' ')} /> */}
+            <DragableCardList items={[<StyleCard title="title">
+              Content1
+            </StyleCard>, <StyleCard title="title">
+              Content2
+            </StyleCard>,<StyleCard title="title">
+              Content3
+            </StyleCard>,<StyleCard title="title">
+              Content4
+            </StyleCard>]} />
+
             {/* <StyleCard title="title">
               Content
             </StyleCard>
