@@ -30,7 +30,8 @@
     "cra-eject": "react-scripts eject",
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test"
+    "test": "craco test",
+    "commit": "cz"
   },
   "eslintConfig": {
     "extends": [
@@ -56,6 +57,11 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
     }
   }
 }
