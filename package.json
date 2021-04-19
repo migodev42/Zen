@@ -31,6 +31,7 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
+    "prepare": "husky install",
     "commit": "cz"
   },
   "eslintConfig": {
@@ -52,7 +53,8 @@
     ]
   },
   "devDependencies": {
-    "cz-conventional-changelog": "3.3.0"
+    "cz-conventional-changelog": "3.3.0",
+    "husky": "^6.0.0"
   },
   "config": {
     "commitizen": {
@@ -61,7 +63,7 @@
   },
   "husky": {
     "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   }
 }
